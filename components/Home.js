@@ -7,8 +7,14 @@ let height = Dimensions.get('window').height
 export default class Home extends Component {
     redirectToGame = () => {
         const { history } = this.props
-        if(history) history.push('/game')
+        if(history) {
+            history.hash = this.state.selectedV
+            history.push('/game')
+        }
         else alert('no history')
+    }
+    state = {
+        selectedV: '12'
     }
     render () {
         return (
@@ -21,7 +27,7 @@ export default class Home extends Component {
                 </Text>
                 <View style={styles.selectorContainer}>
                     <Picker
-                        selectedValue='12'
+                        selectedValue={this.state.selectedV}
                         style={styles.selector}
                         onValueChange={ (itemValue) => {
                             this.setState({selectedV: itemValue})
